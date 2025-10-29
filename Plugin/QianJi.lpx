@@ -1,0 +1,15 @@
+#!name=钱迹会员解锁
+#!desc=钱迹本地会员解锁（解锁自动记账、账单高级导出等功能）
+#!openUrl=https://apps.apple.com/app/id1473785373
+#!author=AkimioJR[https://github.com/AkimioJR]
+#!tag=会员解锁
+#!system=
+#!system_version=
+#!loon_version=3.2.4(787)
+#!icon=https://raw.githubusercontent.com/AkimioJR/LoonPlugin/main/ICON/QianJi.png
+
+[MITM]
+hostname = api.qianjiapp.com
+
+[Rewrite]
+^https:\/\/api\.qianjiapp\.com\/vip\/configios response-body-json-jq '.data.config.userinfo.viptype = 100 | .data.config.userinfo.vipstart = 1365847580 | .data.config.userinfo.vipend = 2365847580'
