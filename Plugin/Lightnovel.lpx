@@ -9,7 +9,7 @@
 #!icon=https://raw.githubusercontent.com/AkimioJR/LoonPlugin/main/ICON/Lightnovel.png
 
 [MITM]
-hostname = *.lightnovel.fun,*.lightnovel.us
+hostname = *.lightnovel.us
 
 [Rewrite]
 ^https?://(.*\.)?lightnovel\.us header https://$1lightnovel.fun
