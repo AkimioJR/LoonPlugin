@@ -13,3 +13,4 @@ hostname = api.qianjiapp.com
 
 [Rewrite]
 ^https:\/\/api\.qianjiapp\.com\/vip\/configios response-body-json-jq '.data.config.userinfo.viptype = 100 | .data.config.userinfo.vipstart = 1365847580 | .data.config.userinfo.vipend = 2365847580'
+^https:\/\/api\.qianjiapp\.com/budget/list response-body-json-jq '.em = "" | .ec = 200'
