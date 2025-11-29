@@ -1,0 +1,15 @@
+#!name=Pixiv去广告
+#!desc=Pixiv去广告+本地会员解锁
+#!openUrl=https://apps.apple.com/app/idid337248563
+#!author=AkimioJR[https://github.com/AkimioJR]
+#!tag=去广告
+#!system=
+#!system_version=
+#!loon_version=3.2.4(787)
+#!icon=https://raw.githubusercontent.com/AkimioJR/LoonPlugin/main/ICON/Pixiv.png
+
+[MITM]
+hostname = oauth.secure.pixiv.net
+
+[Rewrite]
+^https?:\/\/oauth\.secure\.pixiv\.net\/auth\/token response-body-json-jq '.response.user.is_premium = true | .user.is_premium = true | .device_token.is_ads_disabled = true'
