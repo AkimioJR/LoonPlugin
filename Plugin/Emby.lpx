@@ -1,0 +1,15 @@
+#!name=Emby Premiere 解锁
+#!desc=解锁 Emby 会员
+#!openUrl=https://apps.apple.com/app/id9921801938563
+#!author=AkimioJR[https://github.com/AkimioJR]
+#!tag=会员解锁
+#!system=
+#!system_version=
+#!loon_version=
+#!icon=https://raw.githubusercontent.com/AkimioJR/LoonPlugin/main/ICON/Emby.png
+
+[MITM]
+hostname = mb3admin.com
+
+[Rewrite]
+https?:\/\/mb3admin\.com\/admin\/service\/registration\/validateDevice mock-response-body data-type=json data="{"cacheExpirationDays":999,"resultCode":"GOOD","message":"Device Valid"}" status-code=200
