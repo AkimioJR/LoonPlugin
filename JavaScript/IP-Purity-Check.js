@@ -201,7 +201,8 @@ function checkIPPurity() {
     $httpClient.get(requestParams, function (error, response, data) {
         if (error) {
             console.log("请求失败: " + error);
-            const errorHtml = generateErrorMessage("查询超时，请重试");
+            const errorMsg = `查询失败<br/><br/><font color="#666" size="2">错误信息: ${error}</font>`;
+            const errorHtml = generateErrorMessage(errorMsg);
             $done({
                 "title": "🔎 IP 纯净度检测",
                 "htmlMessage": errorHtml
@@ -211,7 +212,10 @@ function checkIPPurity() {
 
         if (response.status !== 200) {
             console.log("请求失败，状态码: " + response.status);
-            const errorHtml = generateErrorMessage("查询失败，请稍后重试");
+            console.log("响应内容: " + data);
+            const responsePreview = data ? data.substring(0, 100) : "无响应内容";
+            const errorMsg = `请求失败<br/><br/><font color="#666" size="2">状态码: ${response.status}<br/>响应: ${responsePreview}${data && data.length > 100 ? '...' : ''}</font>`;
+            const errorHtml = generateErrorMessage(errorMsg);
             $done({
                 "title": "🔎 IP 纯净度检测",
                 "htmlMessage": errorHtml
@@ -231,7 +235,10 @@ function checkIPPurity() {
             });
         } catch (e) {
             console.log("解析失败: " + e);
-            const errorHtml = generateErrorMessage("数据解析失败");
+            console.log("原始数据: " + data);
+            const dataPreview = data ? data.substring(0, 200) : "无数据";
+            const errorMsg = `数据解析失败<br/><br/><font color="#666" size="2">错误: ${e.message || e}<br/><br/>原始数据: ${dataPreview}${data && data.length > 200 ? '...' : ''}</font>`;
+            const errorHtml = generateErrorMessage(errorMsg);
             $done({
                 "title": "🔎 IP 纯净度检测",
                 "htmlMessage": errorHtml
