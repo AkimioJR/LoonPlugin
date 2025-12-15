@@ -7,7 +7,7 @@
 #!loon_version=3.2.4(787)
 #!homepage=
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/Other_icon/120px/Node_detection_tool.png
-#!date=2025-12-16 00:43:26
+#!date=2025-12-16 00:48:39
 
 [Argument]
 IPPURE_API_URL = input, "https://my.ippure.com/v1/info", tag=IP纯净度检测API地址, desc=自定义IP纯净度检测API地址，默认使用 https://my.ippure.com/v1/info

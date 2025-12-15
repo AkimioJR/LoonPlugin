@@ -175,11 +175,36 @@ function generateHtmlMessage(data) {
 
 /**
  * 生成错误消息
- * @param {string} msg - 错误消息
+ * @param {string} title - 错误标题
+ * @param {object} details - 详细信息对象（可选）
  * @returns {string} HTML 格式的错误消息
  */
-function generateErrorMessage(msg) {
-    return `<p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;">🛑 ${msg}</p>`;
+function generateErrorMessage(title, details = {}) {
+    let html = '<div style="text-align: center; font-family: -apple-system; font-size: 15px; line-height: 1.8;">';
+    html += '<hr style="margin: 10px 0; border: 0; border-top: 1px solid #ddd;"/>';
+
+    // 错误标题
+    html += `<p style="font-size: 16px; font-weight: bold; color: #dc3545; margin: 15px 0;">🛑 ${title}</p>`;
+
+    // 详细信息
+    if (Object.keys(details).length > 0) {
+        html += '<div style="text-align: left; margin: 10px 20px; padding: 10px; background-color: #f8f9fa; border-radius: 5px;">';
+
+        for (const [key, value] of Object.entries(details)) {
+            if (value !== null && value !== undefined) {
+                const displayValue = String(value).length > 300 ? String(value).substring(0, 300) + '...' : value;
+                html += `<p style="margin: 5px 0; font-size: 13px;"><b><font color="#666">${key}:</font></b><br/><font color="#999" style="word-break: break-all;">${displayValue}</font></p>`;
+            }
+        }
+
+        html += '</div>';
+    }
+
+    html += '<hr style="margin: 10px 0; border: 0; border-top: 1px solid #ddd;"/>';
+    html += `<font color="#6959CD"><b>节点</b> ➟ ${nodeName}</font>`;
+    html += '</div>';
+
+    return html;
 }
 
 /**
@@ -201,8 +226,9 @@ function checkIPPurity() {
     $httpClient.get(requestParams, function (error, response, data) {
         if (error) {
             console.log("请求失败: " + error);
-            const errorMsg = `查询失败<br/><br/><font color="#666" size="2">错误信息: ${error}</font>`;
-            const errorHtml = generateErrorMessage(errorMsg);
+            const errorHtml = generateErrorMessage("查询失败", {
+                "错误信息": error
+            });
             $done({
                 "title": "🔎 IP 纯净度检测",
                 "htmlMessage": errorHtml
@@ -213,9 +239,10 @@ function checkIPPurity() {
         if (response.status !== 200) {
             console.log("请求失败，状态码: " + response.status);
             console.log("响应内容: " + data);
-            const responsePreview = data ? data.substring(0, 100) : "无响应内容";
-            const errorMsg = `请求失败<br/><br/><font color="#666" size="2">状态码: ${response.status}<br/>响应: ${responsePreview}${data && data.length > 100 ? '...' : ''}</font>`;
-            const errorHtml = generateErrorMessage(errorMsg);
+            const errorHtml = generateErrorMessage("请求失败", {
+                "状态码": response.status,
+                "响应内容": data || "无响应内容"
+            });
             $done({
                 "title": "🔎 IP 纯净度检测",
                 "htmlMessage": errorHtml
@@ -236,9 +263,11 @@ function checkIPPurity() {
         } catch (e) {
             console.log("解析失败: " + e);
             console.log("原始数据: " + data);
-            const dataPreview = data ? data.substring(0, 200) : "无数据";
-            const errorMsg = `数据解析失败<br/><br/><font color="#666" size="2">错误: ${e.message || e}<br/><br/>原始数据: ${dataPreview}${data && data.length > 200 ? '...' : ''}</font>`;
-            const errorHtml = generateErrorMessage(errorMsg);
+            const errorHtml = generateErrorMessage("数据解析失败", {
+                "错误类型": e.name || "解析错误",
+                "错误信息": e.message || e,
+                "原始数据": data || "无数据"
+            });
             $done({
                 "title": "🔎 IP 纯净度检测",
                 "htmlMessage": errorHtml
