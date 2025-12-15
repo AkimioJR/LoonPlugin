@@ -13,12 +13,23 @@
  * - 显示风险等级评估
  */
 
-// IPPure API 地址
-const IPPURE_API_URL = "https://my.ippure.com/v1/info";
+// 默认 IPPure API 地址
+const DEFAULT_IPPURE_API_URL = "https://my.ippure.com/v1/info";
 
 // 获取节点信息
-var inputParams = $environment.params;
-var nodeName = inputParams.node;
+const inputParams = $environment.params;
+const nodeName = inputParams.node;
+
+// 解析参数，支持自定义 API 地址
+let IPPURE_API_URL = DEFAULT_IPPURE_API_URL;
+if (typeof $argument !== 'undefined' && $argument && $argument.IPPURE_API_URL) {
+    try {
+        IPPURE_API_URL = $argument.IPPURE_API_URL;
+        console.log("使用自定义API地址: " + IPPURE_API_URL);
+    } catch (e) {
+        console.log("解析参数失败，使用默认API地址: " + e);
+    }
+}
 
 // 国旗 emoji 映射
 const flags = new Map([

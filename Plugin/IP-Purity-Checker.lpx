@@ -9,8 +9,11 @@
 #!iconhttps://raw.githubusercontent.com/luestr/IconResource/main/Other_icon/120px/Node_detection_tool.png
 #!date=2025-12-16 00:13:54
 
+[Argument]
+IPPURE_API_URL = input, "https://my.ippure.com/v1/info", tag=IP纯净度检测API地址, desc=自定义IP纯净度检测API地址，默认使用 https://my.ippure.com/v1/info
+
 [Script]
 generic script-path=https://kelee.one/Resource/JavaScript/Node_detection_tool/NetworkEntryAndExitQueries.js, timeout=10, tag=入口落地查询, img-url=globe.asia.australia.system
 generic script-path=https://kelee.one/Resource/JavaScript/Node_detection_tool/LocationDetection.js, timeout=10, tag=地理位置查询, img-url=location.circle.system
 generic script-path=https://kelee.one/Resource/JavaScript/Node_detection_tool/NodeUnlockDetection.js, timeout=20, tag=节点解锁查询, img-url=play.circle.system
-generic script-path=https://raw.githubusercontent.com/AkimioJR/LoonPlugin/main/JavaScript/IP-Purity-Check.js, timeout=10, tag=IP纯净度检测,img-url=shield.checkered.system
+generic script-path=https://raw.githubusercontent.com/AkimioJR/LoonPlugin/main/JavaScript/IP-Purity-Check.js, timeout=10, tag=落地IP纯净度检测, img-url=shield.checkered.system, argument=[{IPPURE_API_URL}]
