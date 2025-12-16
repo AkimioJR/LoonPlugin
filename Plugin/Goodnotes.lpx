@@ -1,0 +1,17 @@
+#!name=Goodnotes 内购解锁
+#!desc=解锁 Goodnotes6 内购
+#!openUrl=https://apps.apple.com/app/id1708570616
+#!author=AkimioJR[https://github.com/AkimioJR]
+#!tag=会员解锁
+#!system=
+#!system_version=
+#!loon_version=3.2.1(733)
+#!homepage=
+#!icon=https://raw.githubusercontent.com/AkimioJR/LoonPlugin/main/ICON/Goodnotes.png
+#!date=2025-12-16 13:49:19
+
+[MITM]
+hostname = isi.csan.goodnotes.com
+
+[Rewrite]
+^https:\/\/isi\.csan\.goodnotes\.com\/v1\/(receipts$|subscribers\/[\w-]+$) mock-response-body data-type=json data="{"request_date":"2025-02-22T14:52:31Z","request_date_ms":1740235951685,"subscriber":{"original_purchase_date":"2023-12-31T13:14:20Z","first_seen":"2025-02-21T15:10:07Z","original_application_version":"2395679.285305451","subscriptions":{"com.goodnotes.gn6_one_time_unlock_3999":{"is_sandbox":false,"ownership_type":"PURCHASED","billing_issues_detected_at":null,"period_type":"normal","grace_period_expires_date":null,"unsubscribe_detected_at":null,"original_purchase_date":"2022-09-08T01:04:18Z","purchase_date":"2022-09-08T01:04:17Z","store":"app_store"}},"entitlements":{"apple_access":{"product_identifier":"com.goodnotes.gn6_one_time_unlock_3999","grace_period_expires_date":null,"purchase_date":"2022-09-08T01:04:17Z"},"gn5":{"product_identifier":"com.goodnotes.gn6_one_time_unlock_3999","grace_period_expires_date":null,"purchase_date":"2022-09-08T01:04:17Z"},"crossplatform_access":{"product_identifier":"com.goodnotes.gn6_one_time_unlock_3999","grace_period_expires_date":null,"purchase_date":"2022-09-08T01:04:17Z"}},"management_":null,"original_app_user_id":"10fdb8be-9230-4d6f-91c5-ed36d8cdca88","last_seen":"2025-02-22T14:52:15Z"},"Attention":"Goodnotes内购解锁成功"}" status-code=200
