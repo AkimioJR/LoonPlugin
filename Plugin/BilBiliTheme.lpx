@@ -1,0 +1,24 @@
+#!name=BiliBili自定义主题
+#!desc=解锁 BiliBili 会员主题
+#!openUrl=https://apps.apple.com/app/id736536022
+#!author=AkimioJR[https://github.com/AkimioJR]
+#!tag=
+#!system=
+#!system_version=
+#!loon_version=3.2.1(733)
+#!homepage=
+#!icon=https://raw.githubusercontent.com/AkimioJR/LoonPlugin/main/ICON/BiliBili.png
+#!date=2026-01-17 16:38:17
+
+[Argument]
+user_equip = select,"1682863365001","2529","2530","4124","32264","33459","34813","34814","38342","39859","49390","50107","50605","50763","50874","52484","59580","1679479030001","1680162579001","1680348700001","1680580240001","1680591891001","1682047060001","1682268079001","1682400543001","1682588261001","1682863365001","1683039767001","1683341615001","1683355602001","1683518214001",tag=选择主题皮肤,desc=选择你喜欢的B站主题皮肤。默认：小猫咪金的没烦恼(1682863365001)|初音未来日版(2529)|初音未来夜版(2530)|良辰美景不问天(4124)|EveOneCat2(32264)|有栖mana(33459)|嘉然深色(34813)|嘉然浅色(34814)|萌节六周年(38342)|眠眠兔(39859)|提摩西小队(49390)|灰原哀(50107)|铃芽之旅(50605)|有兽焉(50763)|樱花未来(50874)|JDG坚定信仰(52484)|创作之翼(59580)|奶蓝梦境(1679479030001)|领结猫(1680162579001)|幻想乡日常(1680348700001)|乐正绫生日(1680580240001)|恬豆发芽(1680591891001)|生日快乐(1682047060001)|仓鼠松鼠(1682268079001)|大耳狗(1682400543001)|愿望成真(1682588261001)|小猫咪(1682863365001)|章章梦工厂(1683039767001)|星光六角螈(1683341615001)|脑洞波贝拉(1683355602001)|蜜桃猫(1683518214001)
+load_equip = select,"32263","2531","4125","32263","33460","34811","49391","1680172285001","1680280135001",tag=选择加载动画,desc=选择启动时的加载动画。默认：EveOneCat2(32263)|初音未来13周年(2531)|良辰美景不问天(4125)|EveOneCat2(32263)|有栖mana(33460)|嘉然装扮(34811)|提摩西小队(49391)|豆豆摇头(1680172285001)|幻想乡日常(1680280135001)
+
+[Script]
+http-response ^https?:\/\/app\.bilibili\.com\/x\/resource\/show\/skin\? requires-body = true, script-path=https://raw.githubusercontent.com/AkimioJR/LoonPlugin/main/JavaScript/BiliBili/Modified.skin.js, tag=BiliBili主题修改, argument=[{user_equip},{load_equip}]
+http-response ^https:\/\/app\.bilibili\.com\/x\/v2\/(account\/(myinfo|mine)|space)([\/?]|$) requires-body = true, script-path=https://raw.githubusercontent.com/AkimioJR/LoonPlugin/main/JavaScript/BiliBili/Modified.account.js, tag=BiliBili帐户修改, argument=
+http-response ^https:\/\/api\.bilibili\.com\/x\/vip\/(web\/vip_center\/combine|price\/panel\/lexi|top_panel_info) requires-body = true, script-path=https://raw.githubusercontent.com/AkimioJR/LoonPlugin/main/JavaScript/BiliBili/Modified.vip.js, tag=BiliBili大会员修改, argument=
+
+[MitM]
+hostname = app.bilibili.com, api.bilibili.com
+h2 = true
